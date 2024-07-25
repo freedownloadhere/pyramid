@@ -49,8 +49,8 @@ int main()
 {
 	uint vao, vbo, ebo, vert, frag, prog, model, view, proj, tex, sampler;	
 	mat4 model_mat = GLM_MAT4_IDENTITY_INIT, view_mat = GLM_MAT4_IDENTITY_INIT, proj_mat = GLM_MAT4_IDENTITY_INIT;
-	const char* vertsrc = readFile(".vert");
-	const char* fragsrc = readFile(".frag");
+	const char* vertsrc = readFile("a.vert");
+	const char* fragsrc = readFile("a.frag");
 	int shader_status;
 	char shader_infolog[1024];
 	vec4 up = {0.0f, 1.0f, 0.0f, 1.0f};
@@ -144,7 +144,7 @@ int main()
 	stbi_image_free(data);
 
 	glViewport(0, 0, 800, 800);
-//	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
 	glUseProgram(prog);
 	glBindVertexArray(vao);
@@ -154,7 +154,7 @@ int main()
 
 		glClearColor(0.0f, 0.3f, 0.45f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-//		glClear(GL_DEPTH_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
 
 		glm_rotate(model_mat, glm_rad(glfwGetTime() * 0.1f), up);
 		glUniformMatrix4fv(model, 1, GL_FALSE, (GLfloat*)model_mat);
